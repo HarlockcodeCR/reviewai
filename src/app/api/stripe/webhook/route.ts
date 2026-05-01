@@ -2,9 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { prisma } from '@/lib/prisma';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+function getStripe() {
+  return new Stripe(process.env.STRIPE_SECRET_KEY!);
+}
 
 export async function POST(req: NextRequest) {
+  const stripe = getStripe();
   const payload = await req.text();
   const sig = req.headers.get('stripe-signature');
 
@@ -94,7 +97,7 @@ async function getUserIdFromCustomer(customerId: string): Promise<string> {
   });
   if (existing) return existing.userId;
 
-  const stripe_ = new Stripe(process.env.STRIPE_SECRET_KEY!);
+  const stripe_ = getStripe();
   const customer = await stripe_.customers.retrieve(customerId);
   if (customer.deleted) throw new Error('Customer deleted');
   const userId = (customer as Stripe.Customer).metadata.userId;

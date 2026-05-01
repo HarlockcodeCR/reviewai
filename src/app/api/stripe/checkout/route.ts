@@ -3,9 +3,8 @@ import { getServerSession } from 'next-auth/next';
 import Stripe from 'stripe';
 import { prisma } from '@/lib/prisma';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-
 export async function POST() {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
   const session = await getServerSession();
   if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
