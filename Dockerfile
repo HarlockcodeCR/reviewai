@@ -24,7 +24,7 @@ RUN npx prisma generate
 ARG NEXT_PUBLIC_APP_URL
 ENV NEXT_PUBLIC_APP_URL=$NEXT_PUBLIC_APP_URL
 
-RUN npm run build
+RUN npm run build && mkdir -p /app/public
 
 # ── Stage 3: production runner ────────────────────────────────────────────────
 FROM node:20-alpine AS runner
@@ -35,7 +35,7 @@ ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
 
 # Only copy what's needed to run
-COPY --from=builder /app/public ./public 2>/dev/null || true
+COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
