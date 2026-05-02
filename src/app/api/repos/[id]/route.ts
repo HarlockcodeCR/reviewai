@@ -2,12 +2,13 @@ export const dynamic = 'force-dynamic';
 
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
+import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { makeOctokit, deleteWebhook } from '@/lib/github';
 
 /** PATCH /api/repos/:id — update enabled flag or review rules */
 export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
   if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   const repo = await prisma.repo.findUnique({ where: { id: params.id } });
@@ -27,7 +28,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
 
 /** DELETE /api/repos/:id — disconnect repo and remove webhook */
 export async function DELETE(_req: NextRequest, { params }: { params: { id: string } }) {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
   if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   const repo = await prisma.repo.findUnique({ where: { id: params.id } });
@@ -36,13 +37,13 @@ export async function DELETE(_req: NextRequest, { params }: { params: { id: stri
   }
 
   if (repo.webhookId) {
-    const account = await prisma.account.findFirst({
-      where: { userId: session.user.id, provider: 'github' },
-      select: { access_token: true },
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { githubAccessToken: true },
     });
-    if (account?.access_token) {
+    if (user?.githubAccessToken) {
       const [owner, repoName] = repo.fullName.split('/');
-      const octokit = makeOctokit(account.access_token);
+      const octokit = makeOctokit(user.githubAccessToken);
       await deleteWebhook(octokit, owner, repoName, repo.webhookId).catch(() => {});
     }
   }

@@ -2,20 +2,21 @@ export const dynamic = 'force-dynamic';
 
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
+import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { makeOctokit, registerWebhook } from '@/lib/github';
 
-async function getToken(userId: string): Promise<string | null> {
-  const account = await prisma.account.findFirst({
-    where: { userId, provider: 'github' },
-    select: { access_token: true },
+async function getGithubToken(userId: string): Promise<string | null> {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { githubAccessToken: true },
   });
-  return account?.access_token ?? null;
+  return user?.githubAccessToken ?? null;
 }
 
 /** GET /api/repos — list user's connected repos with recent reviews */
 export async function GET() {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
   if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   const repos = await prisma.repo.findMany({
@@ -44,7 +45,7 @@ export async function GET() {
 
 /** POST /api/repos — connect a new repo and install webhook */
 export async function POST(req: NextRequest) {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
   if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   const { fullName } = await req.json();
@@ -54,7 +55,7 @@ export async function POST(req: NextRequest) {
 
   const [owner, repoName] = fullName.split('/');
 
-  const token = await getToken(session.user.id);
+  const token = await getGithubToken(session.user.id);
   if (!token) return NextResponse.json({ error: 'No GitHub token' }, { status: 401 });
 
   const octokit = makeOctokit(token);

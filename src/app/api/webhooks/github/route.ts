@@ -61,10 +61,11 @@ export async function POST(req: NextRequest) {
     where: { githubId: repoData.id, enabled: true },
     include: {
       user: {
-        include: {
-          accounts: {
-            select: { provider: true, access_token: true },
-          },
+        select: {
+          id: true,
+          githubAccessToken: true,
+          reviewsThisMonth: true,
+          reviewsResetAt: true,
           subscription: true,
         },
       },

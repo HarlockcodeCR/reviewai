@@ -109,17 +109,16 @@ export async function postGitHubReview(
 
 /** Full pipeline: fetch diff → Claude review → post to GitHub → update DB */
 export async function runReview(
-  dbReview: Review & { repo: Repo & { user: { accounts: { access_token: string | null; provider: string }[] } } },
+  dbReview: Review & { repo: Repo & { user: { githubAccessToken: string | null } } },
 ): Promise<void> {
   const [owner, repoName] = dbReview.repo.fullName.split('/');
 
-  // Get the user's GitHub OAuth token
-  const githubAccount = dbReview.repo.user.accounts.find((a) => a.provider === 'github');
-  if (!githubAccount?.access_token) {
+  const token = dbReview.repo.user.githubAccessToken;
+  if (!token) {
     throw new Error('No GitHub token found for user');
   }
 
-  const octokit = makeOctokit(githubAccount.access_token);
+  const octokit = makeOctokit(token);
 
   // Mark as in-progress
   await prisma.review.update({
