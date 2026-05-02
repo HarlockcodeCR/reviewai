@@ -5,8 +5,9 @@ import GithubProvider from 'next-auth/providers/github';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { prisma } from '@/lib/prisma';
 
+process.env.NEXTAUTH_URL = process.env.NEXTAUTH_URL || 'https://reviewai-five.vercel.app';
+
 const handler = NextAuth({
-  trustHost: true,
   adapter: PrismaAdapter(prisma),
   providers: [
     GithubProvider({
