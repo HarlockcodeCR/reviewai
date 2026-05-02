@@ -23,12 +23,15 @@ const handler = NextAuth({
   ],
   callbacks: {
     async session({ session, user }) {
-      session.user.id = user.id;
+      if (user?.id) {
+        session.user.id = user.id;
+      }
       return session;
     },
   },
   pages: {
     signIn: '/login',
+    error: '/login',
   },
   session: { strategy: 'database' },
 });
