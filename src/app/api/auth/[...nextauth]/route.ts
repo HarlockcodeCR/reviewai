@@ -26,18 +26,6 @@ const handler = NextAuth({
       session.user.id = user.id;
       return session;
     },
-    async signIn({ user, account, profile }) {
-      if (account?.provider === 'github' && profile) {
-        const githubProfile = profile as { login?: string };
-        if (githubProfile.login) {
-          await prisma.user.update({
-            where: { id: user.id! },
-            data: { githubLogin: githubProfile.login },
-          }).catch(() => { /* ignore if user not yet created */ });
-        }
-      }
-      return true;
-    },
   },
   pages: {
     signIn: '/login',
