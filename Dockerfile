@@ -31,7 +31,8 @@ FROM node:20-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
-ENV PORT=3000
+# PORT is intentionally not set here — Railway injects it at runtime.
+# HOSTNAME must be 0.0.0.0 so the server accepts connections from outside the container.
 ENV HOSTNAME=0.0.0.0
 
 # Only copy what's needed to run
@@ -45,4 +46,5 @@ EXPOSE 3000
 
 # Secrets (DATABASE_URL, NEXTAUTH_SECRET, etc.) are injected by Railway at
 # runtime only — never baked into the image.
-CMD ["sh", "-c", "npx prisma db push --accept-data-loss && npm start"]
+# next start -p uses Railway's $PORT; falls back to 3000 locally.
+CMD ["sh", "-c", "npx prisma db push --accept-data-loss && npx next start -H 0.0.0.0 -p ${PORT:-3000}"]
