@@ -99,7 +99,7 @@ export default function LandingPage() {
             <div className="bg-white text-gray-900 rounded-2xl p-8 text-left relative">
               <span className="absolute top-4 right-4 bg-gray-900 text-white text-xs px-2 py-1 rounded-full">Popular</span>
               <h3 className="text-lg font-semibold">Pro</h3>
-              <p className="text-4xl font-black mt-2">$19<span className="text-xl font-normal text-gray-500">/mo</span></p>
+              <p className="text-4xl font-black mt-2">$99<span className="text-xl font-normal text-gray-500">/mo</span></p>
               <ul className="mt-6 space-y-3 text-gray-700 text-sm">
                 <li>500 reviews / month</li>
                 <li>All issue categories</li>
