@@ -94,15 +94,35 @@ export async function postGitHubReview(
     // Non-fatal — proceed with original event
   }
 
-  const review = await octokit.pulls.createReview({
-    owner,
-    repo,
-    pull_number: pullNumber,
-    commit_id: headSha,
-    body,
-    event: reviewEvent,
-    comments: inlineComments,
-  });
+  // Try with inline comments first; if GitHub rejects any position, fall back to body-only
+  let review;
+  try {
+    review = await octokit.pulls.createReview({
+      owner,
+      repo,
+      pull_number: pullNumber,
+      commit_id: headSha,
+      body,
+      event: reviewEvent,
+      comments: inlineComments,
+    });
+  } catch (err: unknown) {
+    const status = (err as { status?: number })?.status;
+    if (status === 422 && inlineComments.length > 0) {
+      // One or more positions couldn't be resolved — post without inline comments
+      review = await octokit.pulls.createReview({
+        owner,
+        repo,
+        pull_number: pullNumber,
+        commit_id: headSha,
+        body,
+        event: reviewEvent,
+        comments: [],
+      });
+    } else {
+      throw err;
+    }
+  }
 
   return review.data.id;
 }
