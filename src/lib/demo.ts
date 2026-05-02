@@ -25,3 +25,4 @@ export function formatDate(date: Date) {
   return date.getFullYear() + '/' + date.getMonth() + '/' + date.getDate();
 }
 // trigger review
+// retrigger after position fix
