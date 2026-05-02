@@ -98,15 +98,15 @@ model Review {
 }
 
 model Subscription {
-  id                   String   @id @default(cuid())
-  userId               String   @unique
-  user                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  stripeCustomerId     String   @unique
-  stripeSubscriptionId String?  @unique
-  stripePriceId        String?
-  status               String   @default("inactive") // active | inactive | past_due | canceled
-  plan                 String   @default("free") // free | pro
-  currentPeriodEnd     DateTime?
-  createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt
+  id                 String    @id @default(cuid())
+  userId             String    @unique
+  user               User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lsCustomerId       String?   @unique
+  lsSubscriptionId   String?   @unique
+  lsVariantId        String?
+  status             String    @default("inactive") // active | inactive | past_due | cancelled
+  plan               String    @default("free") // free | pro
+  currentPeriodEnd   DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
 }
