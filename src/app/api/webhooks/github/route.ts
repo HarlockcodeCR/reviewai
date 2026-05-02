@@ -1,7 +1,9 @@
 export const dynamic = 'force-dynamic';
+export const maxDuration = 300; // 5 min — allows Claude to finish before Vercel kills the function
 
 import { createHmac, timingSafeEqual } from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
+import { waitUntil } from '@vercel/functions';
 import { prisma } from '@/lib/prisma';
 import { runReview } from '@/lib/github';
 import { FREE_PLAN_LIMIT, PRO_PLAN_LIMIT } from '@/types';
@@ -111,18 +113,20 @@ export async function POST(req: NextRequest) {
     },
   });
 
-  // Run the review asynchronously — respond to GitHub immediately (< 10s requirement)
-  // In production, offload to a queue (BullMQ, Inngest, etc.). Here we fire-and-forget.
-  runReview({ ...review, repo: { ...repo, user } }).catch(async (err) => {
-    console.error(`Review ${review.id} failed:`, err);
-    await prisma.review.update({
-      where: { id: review.id },
-      data: {
-        status: 'failed',
-        errorMessage: err instanceof Error ? err.message : String(err),
-      },
-    });
-  });
+  // waitUntil keeps the serverless function alive until the review completes
+  // without making GitHub wait for it (GitHub requires < 10s response)
+  waitUntil(
+    runReview({ ...review, repo: { ...repo, user } }).catch(async (err) => {
+      console.error(`Review ${review.id} failed:`, err);
+      await prisma.review.update({
+        where: { id: review.id },
+        data: {
+          status: 'failed',
+          errorMessage: err instanceof Error ? err.message : String(err),
+        },
+      });
+    }),
+  );
 
   return NextResponse.json({ ok: true, reviewId: review.id });
 }
