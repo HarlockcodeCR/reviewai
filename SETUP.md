@@ -5,7 +5,7 @@
 - PostgreSQL database (local or hosted — Railway, Neon, Supabase all work)
 - GitHub OAuth App
 - Anthropic API key
-- Stripe account (for billing)
+- LemonSqueezy account (for billing)
 
 ---
 
@@ -41,13 +41,6 @@ openssl rand -hex 32
 openssl rand -base64 32
 ```
 
-### Stripe
-1. Create a product in Stripe Dashboard (e.g. "ReviewAI Pro — $19/month")
-2. Copy the **Price ID** (starts with `price_`)
-3. Copy your **Secret Key** (starts with `sk_`)
-4. For the webhook secret: `stripe listen --forward-to localhost:3000/api/stripe/webhook`
-   (or set up a webhook endpoint in the Stripe Dashboard for production)
-
 ---
 
 ## 3. Set up the database
@@ -70,11 +63,8 @@ npm run dev
 
 For webhooks to reach your local machine, use:
 ```bash
-# Option A: ngrok
+# ngrok
 ngrok http 3000
-
-# Option B: Stripe CLI (only for Stripe webhooks)
-stripe listen --forward-to localhost:3000/api/stripe/webhook
 ```
 
 Update `NEXT_PUBLIC_APP_URL` in `.env.local` to your ngrok URL so GitHub can reach the webhook endpoint.
@@ -89,7 +79,7 @@ Update `NEXT_PUBLIC_APP_URL` in `.env.local` to your ngrok URL so GitHub can rea
 4. Set all environment variables from `.env.example` in Railway's Variables tab
 5. Set `NEXT_PUBLIC_APP_URL` to your Railway domain
 6. Update your GitHub OAuth App callback URL to `https://your-domain.railway.app/api/auth/callback/github`
-7. Update your Stripe webhook endpoint to `https://your-domain.railway.app/api/stripe/webhook`
+7. Update your GitHub OAuth App callback URL to `https://your-domain.railway.app/api/auth/callback/github`
 
 ---
 
