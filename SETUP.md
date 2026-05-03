@@ -1,4 +1,4 @@
-# ReviewAI Setup Guide
+# CodeReview by Keynition Setup Guide
 
 ## Prerequisites
 - Node.js 18+

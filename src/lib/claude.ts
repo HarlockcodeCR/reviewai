@@ -158,6 +158,6 @@ export function formatIssueComment(issue: ReviewIssue): string {
   if (issue.suggestion) {
     body += `\n\n**Suggested fix:**\n${issue.suggestion}`;
   }
-  body += `\n\n<sub>Reviewed by [ReviewAI](${process.env.NEXT_PUBLIC_APP_URL})</sub>`;
+  body += `\n\n<sub>Reviewed by [CodeReview by Keynition](${process.env.NEXT_PUBLIC_APP_URL})</sub>`;
   return body;
 }

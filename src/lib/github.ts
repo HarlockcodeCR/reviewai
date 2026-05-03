@@ -74,7 +74,7 @@ export async function postGitHubReview(
   };
   const event = eventMap[result.verdict] ?? 'COMMENT';
 
-  let body = `## ReviewAI Analysis\n\n${result.summary}`;
+  let body = `## CodeReview by Keynition Analysis\n\n${result.summary}`;
   if (fallbackLines.length > 0) {
     body += `\n\n---\n\n### Additional Notes\n\n${fallbackLines.join('\n\n---\n\n')}`;
   }
