@@ -53,7 +53,7 @@ export default async function DashboardPage({
       {/* Header */}
       <header className="border-b border-gray-800 px-6 py-4 flex items-center justify-between">
         <Link href="/" className="font-bold text-white text-lg">
-          ReviewAI
+          CodeReview by Keynition
         </Link>
         <div className="flex items-center gap-4">
           {isPro ? (
