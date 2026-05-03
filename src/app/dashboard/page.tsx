@@ -57,7 +57,7 @@ export default async function DashboardPage({
         </Link>
         <div className="flex items-center gap-4">
           {isPro ? (
-            <span className="bg-white text-gray-900 text-xs font-bold px-2 py-1 rounded">PRO</span>
+            <span className="bg-[#00BFFF] text-gray-900 text-xs font-bold px-2 py-1 rounded">PRO</span>
           ) : (
             <UpgradeButton />
           )}
