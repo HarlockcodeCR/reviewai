@@ -5,10 +5,10 @@ export default function LandingPage() {
     <main className="min-h-screen flex flex-col">
       {/* Nav */}
       <nav className="border-b border-gray-800 px-6 py-4 flex items-center justify-between">
-        <span className="font-bold text-xl text-white">ReviewAI</span>
+        <span className="font-bold text-xl text-white">CodeReview by Keynition</span>
         <Link
           href="/login"
-          className="bg-white text-gray-900 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-100 transition"
+          className="bg-[#00BFFF] text-gray-900 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#0099CC] transition"
         >
           Get started free
         </Link>
@@ -25,14 +25,14 @@ export default function LandingPage() {
           Instant code reviews on every pull request
         </h1>
         <p className="mt-6 text-xl text-gray-400 max-w-xl">
-          ReviewAI connects to your GitHub repos and posts AI-generated code reviews covering
+          CodeReview connects to your GitHub repos and posts AI-generated code reviews covering
           security, performance, style, and architecture — automatically.
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row gap-4">
           <Link
             href="/login"
-            className="bg-white text-gray-900 px-8 py-3 rounded-lg font-semibold text-lg hover:bg-gray-100 transition"
+            className="bg-[#00BFFF] text-gray-900 px-8 py-3 rounded-lg font-semibold text-lg hover:bg-[#0099CC] transition"
           >
             Connect GitHub — it&apos;s free
           </Link>
@@ -56,12 +56,12 @@ export default function LandingPage() {
               {
                 step: '01',
                 title: 'Connect your repo',
-                body: 'Sign in with GitHub and select which repos to enable. ReviewAI installs a webhook automatically.',
+                body: 'Sign in with GitHub and select which repos to enable. CodeReview installs a webhook automatically.',
               },
               {
                 step: '02',
                 title: 'Open a pull request',
-                body: 'Whenever a PR is opened or updated, ReviewAI fetches the diff and sends it to Claude for analysis.',
+                body: 'Whenever a PR is opened or updated, CodeReview fetches the diff and sends it to Claude for analysis.',
               },
               {
                 step: '03',
@@ -115,7 +115,8 @@ export default function LandingPage() {
       </section>
 
       <footer className="border-t border-gray-800 py-8 text-center text-sm text-gray-500">
-        ReviewAI &copy; {new Date().getFullYear()}
+        <p className="mb-1">Don&apos;t think outside the box — <span className="text-[#00BFFF] font-semibold">unlock it.</span></p>
+        <p>CodeReview by Keynition &copy; {new Date().getFullYear()}</p>
       </footer>
     </main>
   );
