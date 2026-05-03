@@ -8,7 +8,7 @@ export function UpgradeButton() {
       href="https://keynition-reviewai.lemonsqueezy.com/checkout/buy/021355de-0e98-4a5a-9e0c-46c581efa116"
       target="_blank"
       rel="noopener noreferrer"
-      className="bg-white text-gray-900 text-sm px-3 py-1.5 rounded-lg font-semibold hover:bg-gray-100 transition"
+      className="bg-[#00BFFF] text-gray-900 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#0099CC] transition"
     >
       Upgrade to Pro
     </a>

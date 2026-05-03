@@ -6,7 +6,7 @@ export default function LoginPage() {
   return (
     <main className="min-h-screen flex items-center justify-center px-4">
       <div className="bg-gray-900 border border-gray-800 rounded-2xl p-10 w-full max-w-md text-center">
-        <h1 className="text-2xl font-bold text-white">Sign in to ReviewAI</h1>
+        <h1 className="text-2xl font-bold text-white">Sign in to CodeReview by Keynition</h1>
         <p className="mt-2 text-gray-400">Connect your GitHub account to get started.</p>
 
         <button
@@ -20,7 +20,7 @@ export default function LoginPage() {
         </button>
 
         <p className="mt-6 text-xs text-gray-500">
-          By signing in you agree to let ReviewAI read your repos and manage webhooks.
+          By signing in you agree to let CodeReview by Keynition read your repos and manage webhooks.
           We never store your code.
         </p>
       </div>
