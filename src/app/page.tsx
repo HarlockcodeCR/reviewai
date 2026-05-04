@@ -47,6 +47,23 @@ export default function LandingPage() {
         <p className="mt-4 text-sm text-gray-500">20 free reviews/month. No credit card needed.</p>
       </section>
 
+      {/* Demo video */}
+      <section className="border-t border-gray-800 py-20 px-6">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-3xl font-bold text-white mb-4">See it in action</h2>
+          <p className="text-gray-400 mb-10">Watch how CodeReview automatically analyzes a pull request and posts inline comments.</p>
+          <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+            <iframe
+              className="absolute inset-0 w-full h-full rounded-xl"
+              src="https://www.youtube.com/embed/27yuZpLgwBU"
+              title="CodeReview by Keynition demo"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      </section>
+
       {/* How it works */}
       <section id="how-it-works" className="border-t border-gray-800 py-20 px-6">
         <div className="max-w-4xl mx-auto">
