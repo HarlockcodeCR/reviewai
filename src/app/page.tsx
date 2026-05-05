@@ -133,7 +133,7 @@ export default function LandingPage() {
 
       <footer className="border-t border-gray-800 py-8 text-center text-sm text-gray-500">
         <p className="mb-1">Don&apos;t think outside the box — <span className="text-[#00BFFF] font-semibold">unlock it.</span></p>
-        <p>CodeReview by Keynition &copy; {new Date().getFullYear()}</p>
+        <p>CodeReview by Keynition &copy; {new Date().getFullYear()} &middot; <Link href="/terms" className="hover:text-[#00BFFF] transition">Terms</Link> &middot; <Link href="/privacy" className="hover:text-[#00BFFF] transition">Privacy</Link></p>
       </footer>
     </main>
   );
