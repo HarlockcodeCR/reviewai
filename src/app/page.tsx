@@ -121,9 +121,9 @@ export default function LandingPage() {
                 <li>All issue categories</li>
                 <li>Inline GitHub comments</li>
               </ul>
-              <Link href="/login" className="mt-8 block text-center border border-gray-600 py-2.5 rounded-lg hover:border-gray-400 transition text-sm font-semibold">
+              <a href="https://keynition-reviewai.lemonsqueezy.com/checkout/buy/ba13f633-a1c8-4c21-a189-d98f7c8f5691" className="mt-8 block text-center border border-gray-600 py-2.5 rounded-lg hover:border-gray-400 transition text-sm font-semibold">
                 Get started
-              </Link>
+              </a>
             </div>
             <div className="bg-white text-gray-900 rounded-2xl p-8 text-left relative">
               <span className="absolute top-4 right-4 bg-gray-900 text-white text-xs px-2 py-1 rounded-full">Popular</span>
@@ -135,9 +135,9 @@ export default function LandingPage() {
                 <li>Configurable rules per repo</li>
                 <li>Priority support</li>
               </ul>
-              <Link href="/login" className="mt-8 block text-center bg-gray-900 text-white py-2.5 rounded-lg hover:bg-gray-700 transition text-sm font-semibold">
+              <a href="https://keynition-reviewai.lemonsqueezy.com/checkout/buy/021355de-0e98-4a5a-9e0c-46c581efa116" className="mt-8 block text-center bg-gray-900 text-white py-2.5 rounded-lg hover:bg-gray-700 transition text-sm font-semibold">
                 Start free trial
-              </Link>
+              </a>
             </div>
           </div>
           <p className="mt-8 text-sm text-gray-500">A 3-person team pays $72–90/mo on CodeRabbit. Here it&apos;s $39 flat.</p>
