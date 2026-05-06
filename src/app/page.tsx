@@ -22,11 +22,10 @@ export default function LandingPage() {
         </div>
 
         <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight max-w-3xl">
-          Instant code reviews on every pull request
+          AI code reviews. Flat rate. No per-seat math.
         </h1>
         <p className="mt-6 text-xl text-gray-400 max-w-xl">
-          CodeReview connects to your GitHub repos and posts AI-generated code reviews covering
-          security, performance, style, and architecture — automatically.
+          CodeReview connects to your GitHub repos and posts AI-generated reviews on every PR — automatically. One price for your whole team, not per developer.
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row gap-4">
@@ -98,9 +97,9 @@ export default function LandingPage() {
 
       {/* Pricing */}
       <section className="border-t border-gray-800 py-20 px-6 bg-gray-900">
-        <div className="max-w-3xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-white mb-12">Simple pricing</h2>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-3 gap-6">
             <div className="bg-gray-800 border border-gray-700 rounded-2xl p-8 text-left">
               <h3 className="text-lg font-semibold text-white">Free</h3>
               <p className="text-4xl font-black text-white mt-2">$0</p>
@@ -113,12 +112,25 @@ export default function LandingPage() {
                 Get started
               </Link>
             </div>
+            <div className="bg-gray-800 border border-gray-700 rounded-2xl p-8 text-left">
+              <h3 className="text-lg font-semibold text-white">Solo</h3>
+              <p className="text-4xl font-black text-white mt-2">$19<span className="text-xl font-normal text-gray-500">/mo</span></p>
+              <ul className="mt-6 space-y-3 text-gray-300 text-sm">
+                <li>1 repo</li>
+                <li>Unlimited reviews</li>
+                <li>All issue categories</li>
+                <li>Inline GitHub comments</li>
+              </ul>
+              <Link href="/login" className="mt-8 block text-center border border-gray-600 py-2.5 rounded-lg hover:border-gray-400 transition text-sm font-semibold">
+                Get started
+              </Link>
+            </div>
             <div className="bg-white text-gray-900 rounded-2xl p-8 text-left relative">
               <span className="absolute top-4 right-4 bg-gray-900 text-white text-xs px-2 py-1 rounded-full">Popular</span>
-              <h3 className="text-lg font-semibold">Pro</h3>
-              <p className="text-4xl font-black mt-2">$99<span className="text-xl font-normal text-gray-500">/mo</span></p>
+              <h3 className="text-lg font-semibold">Team</h3>
+              <p className="text-4xl font-black mt-2">$39<span className="text-xl font-normal text-gray-500">/mo</span></p>
               <ul className="mt-6 space-y-3 text-gray-700 text-sm">
-                <li>500 reviews / month</li>
+                <li>Unlimited reviews</li>
                 <li>All issue categories</li>
                 <li>Configurable rules per repo</li>
                 <li>Priority support</li>
@@ -128,6 +140,7 @@ export default function LandingPage() {
               </Link>
             </div>
           </div>
+          <p className="mt-8 text-sm text-gray-500">A 3-person team pays $72–90/mo on CodeRabbit. Here it&apos;s $39 flat.</p>
         </div>
       </section>
 
